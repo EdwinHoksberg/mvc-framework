@@ -1,4 +1,4 @@
 .idea/
 .htaccess
 config.php
-logs/
+logs/*
