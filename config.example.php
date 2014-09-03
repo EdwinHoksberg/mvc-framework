@@ -1,4 +1,16 @@
 <?php
+
+/**
+ * This is a sample config file, and shows how you can use it
+ * Copy this file to `config.php` when done
+ *
+ * @author Edwin Hoksberg - info@edwinhoksberg.nl
+ * @version 1.0
+ * @date 31-08-2014
+ *
+ * @todo add more upload functions for different types of files
+ * @todo fix image detection
+ */
 $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://';
 
 $siteurl = $protocol . $_SERVER['SERVER_NAME'] . substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/')) . '/';

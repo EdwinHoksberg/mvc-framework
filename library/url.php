@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This class is to help with creating pages and navigating the site
+ *
+ * @author Edwin Hoksberg - info@edwinhoksberg.nl
+ * @version 1.0
+ * @date 31-08-2014
+ *
+ * @todo add functions like `getcurrenturl` + more
+ */
 final class Url {
 
     public static function segment($key) {

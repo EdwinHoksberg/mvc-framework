@@ -1,8 +1,13 @@
 <?php
 
 /**
- * Functions for loading language files
- * @author Edwin Hoksberg
+ * The language class will load all the neccesary languages for the page
+ *
+ * @author Edwin Hoksberg - info@edwinhoksberg.nl
+ * @version 1.0
+ * @date 31-08-2014
+ *
+ * @todo refactoring
  */
 final class Language {
 

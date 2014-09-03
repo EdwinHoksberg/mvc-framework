@@ -2,7 +2,12 @@
 
 /**
  * The main router file
- * @author Edwin Hoksberg
+ *
+ * @author Edwin Hoksberg - info@edwinhoksberg.nl
+ * @version 1.0
+ * @date 31-08-2014
+ *
+ * @todo work better with URL segments
  */
 class Router {
 

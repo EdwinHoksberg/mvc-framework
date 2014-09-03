@@ -1,8 +1,13 @@
 <?php
 
 /**
- * Functions for loading views, controllers and models.
- * @author Edwin Hoksberg
+ * This (messy) class loads views, controllers and models
+ *
+ * @author Edwin Hoksberg - info@edwinhoksberg.nl
+ * @version 1.0
+ * @date 31-08-2014
+ *
+ * @todo refactoring
  */
 final class Load extends Router {
 

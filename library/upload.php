@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * An class to help with uploading files
+ *
+ * @author Edwin Hoksberg - info@edwinhoksberg.nl
+ * @version 1.0
+ * @date 31-08-2014
+ *
+ * @todo add more upload functions for different types of files
+ * @todo fix image detection
+ */
 final class Upload extends Router {
 
     function __construct() {

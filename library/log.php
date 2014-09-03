@@ -1,8 +1,13 @@
 <?php
 
 /**
- * Functions for displaying and logging errors
- * @author Edwin Hoksberg
+ * The Log class; this will help logging and/or displaying error messages
+ *
+ * @author Edwin Hoksberg - info@edwinhoksberg.nl
+ * @version 1.0
+ * @date 31-08-2014
+ *
+ * @todo add info and more levels or logging
  */
 final class Log {
 

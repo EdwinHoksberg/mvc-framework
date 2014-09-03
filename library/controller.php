@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * All these variables can be used in a controller
+ *
+ * @author Edwin Hoksberg - info@edwinhoksberg.nl
+ * @version 1.0
+ * @date 31-08-2014
+ *
+ * @todo add more functionality
+ */
 class Controller extends Router {
 
     public $_load;

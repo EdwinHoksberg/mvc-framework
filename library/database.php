@@ -7,7 +7,8 @@
  * @version 1.0
  * @date 31-08-2014
  *
- * @todo change all this to stmt prepared statements and multiple functions
+ * @todo change all this to prepared statements
+ * @todo a function for each sql statement
  */
 final class Database {
 
