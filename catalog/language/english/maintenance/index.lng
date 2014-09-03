@@ -1,0 +1,2 @@
+<?php
+$lng['maintenance'] = 'This page is currently undergoing maintenance.';

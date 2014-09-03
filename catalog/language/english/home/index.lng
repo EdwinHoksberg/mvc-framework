@@ -1,0 +1,2 @@
+<?php
+$lng['welcome_msg'] = 'Welcome to the homepage of MVC.';
