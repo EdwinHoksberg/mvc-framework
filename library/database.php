@@ -25,6 +25,8 @@ final class Database extends PDO {
 
     public function select($sql, $data = array(), $fetchMode = PDO::FETCH_OBJ) {
 
+        $sql = str_replace("{DB_PREFIX}", DB_PREFIX, $sql);
+
         $stmt = $this->prepare($sql);
         foreach ($data as $key => $value) {
             if (is_int($value)) {
