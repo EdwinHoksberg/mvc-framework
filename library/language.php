@@ -16,8 +16,12 @@ final class Language {
 
         if (empty($lng)) {
             $db = new Database();
-            $result = $db->query("SELECT `name` FROM {db_prefix}language WHERE `language_id`=" . $db->escape($lang_id));
-            $currentLang = $result->row['name'];
+            $result = $db->select("SELECT `name` FROM ". DB_PREFIX ."language",
+                array(
+                    'language_id' => $lang_id
+                )
+            );
+            $currentLang = $result[0]->name;
 
             $defaultFile = DIR_LANGUAGE . 'english/' . $file . '.lng';
 
