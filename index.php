@@ -21,7 +21,11 @@ class Router {
         session_start();
 
         // require config file
-        require_once('config.php');
+        if (is_readable('config.php')) {
+            require_once('config.php');
+        } else {
+            die('config.php not found');
+        }
 
         // load database functions
         require_once(DIR_LIBRARY . 'database.php');
