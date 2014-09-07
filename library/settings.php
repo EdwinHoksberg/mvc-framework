@@ -12,25 +12,78 @@
  */
 final class Settings extends Router {
 
-    public static function get($name = null) {
+    /**
+     * This function will get any settings from the database.
+     * You should set the forceUpdate parameter to true if you inserted
+     * an new value into te database, or it won't be available.
+     *
+     * @param null $name
+     * @param bool $forceUpdate
+     * @return string|bool
+     */
+    public static function get($name = null, $forceUpdate = false) {
         static $data = array();
 
-        if (empty($data)) {
+        if (empty($data) || $forceUpdate) {
             $db = new Database();
 
-            $query = "SELECT `name`,`value` FROM {db_prefix}settings;";
-            $result = $db->query($query);
+            $result = $db->select("
+            SELECT
+                `name`,
+                `value`
+              FROM ". DB_PREFIX ."settings");
 
-            $cfg = array();
-            foreach($result->rows as $row) {
-                $cfg[$row['name']] = $row['value'];
+            foreach($result as $row) {
+                $data[$row->name] = $row->value;
             }
-            $data = $cfg;
         }
+
         if ($name != null && array_key_exists($name, $data)) {
             return $data[$name];
         } else {
-            return $data;
+            return false;
         }
+    }
+
+    /**
+     * This function will insert an new value into the database,
+     * and if it already exists, it will overwrite it.
+     *
+     * @param $name - The value name
+     * @param $value - The value
+     * @return bool
+     */
+    public static function set($name, $value) {
+
+        $db = new Database();
+
+        $alreadyExists = $db->select("SELECT `name` FROM {DB_PREFIX}settings WHERE `name` = :name",
+            array(
+                ":name" => $name
+            )
+        );
+
+        if (count($alreadyExists) > 0) { // update existing setting
+
+            return $db->update("settings",
+                array( // values
+                    "name" => $name,
+                    "value" => $value
+                ),
+                array( // where
+                    "name" => $name
+                )
+            );
+        } else { // insert new setting in database
+
+            return $db->insert("settings",
+                array( // values
+                    "name" => $name,
+                    "value" => $value
+                )
+            );
+        }
+
+
     }
 }
