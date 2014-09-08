@@ -15,8 +15,7 @@ final class Language {
         $data = array();
 
         if (empty($lng)) {
-            $db = new Database();
-            $result = $db->select("SELECT `name` FROM ". DB_PREFIX ."language",
+            $result = Database::select("SELECT `name` FROM ". DB_PREFIX ."language",
                 array(
                     'language_id' => $lang_id
                 )

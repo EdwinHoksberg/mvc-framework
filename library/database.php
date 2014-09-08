@@ -8,28 +8,35 @@
  * @date 31-08-2014
  *
  */
-final class Database extends PDO {
+final class Database {
+
+    protected static $db;
 
     /**
      * Initialize the mysql database link
      */
-    public function __construct() {
+    public static function initialize() {
         try {
-            parent::__construct(DB_DRIVER . ':host=' . DB_HOST . ';port=' . DB_PORT . ';charset=utf8;', DB_USER, DB_PASS);
-            if ($this->exec("USE " . DB_DBNAME) === false) {
+            self::$db = new PDO(DB_DRIVER . ':host=' . DB_HOST . ';port=' . DB_PORT . ';charset=utf8;', DB_USER, DB_PASS);
+            if (self::$db->exec("USE " . DB_DBNAME) === false) {
                 Log::error("Database " . DB_DBNAME . " not found!\n", "<h1>Database '" . DB_DBNAME . "' not found!</h1><br />", true);
             }
-            $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
+            var_dump($e->getMessage());
             Log::error("MySQL connection failed: {$e->getMessage()}\n", "<h1>MySQL connection failed</h1>: {$e->getMessage()}<br />", true);
         }
     }
 
-    public function select($sql, $data = array(), $fetchMode = PDO::FETCH_OBJ) {
+    public static function select($sql, $data = array(), $fetchMode = PDO::FETCH_OBJ) {
+
+        if (!self::$db) {
+            self::initialize();
+        }
 
         $sql = str_replace("{DB_PREFIX}", DB_PREFIX, $sql);
 
-        $stmt = $this->prepare($sql);
+        $stmt = self::$db->prepare($sql);
         foreach ($data as $key => $value) {
             if (is_int($value)) {
                 $stmt->bindValue($key, $value, PDO::PARAM_INT);
@@ -42,14 +49,18 @@ final class Database extends PDO {
         return $stmt->fetchAll($fetchMode);
     }
 
-    public function insert($table, $data) {
+    public static function insert($table, $data) {
+
+        if (!self::$db) {
+            self::initialize();
+        }
 
         ksort($data);
 
         $fieldNames = implode(',', array_keys($data));
         $fieldValues = ':' . implode(', :', array_keys($data));
 
-        $stmt = $this->prepare("INSERT INTO ". DB_PREFIX ."{$table} ({$fieldNames}) VALUES ({$fieldValues})");
+        $stmt = self::$db->prepare("INSERT INTO ". DB_PREFIX ."{$table} ({$fieldNames}) VALUES ({$fieldValues})");
         foreach ($data as $key => $value) {
             $stmt->bindValue(":$key", $value);
         }
@@ -57,7 +68,11 @@ final class Database extends PDO {
         return $stmt->execute();
     }
 
-    public function update($table, $data, $where) {
+    public static function update($table, $data, $where) {
+
+        if (!self::$db) {
+            self::initialize();
+        }
 
         ksort($data);
         ksort($where);
@@ -79,7 +94,7 @@ final class Database extends PDO {
         }
         $whereDetails = ltrim($whereDetails, ' AND ');
 
-        $stmt = $this->prepare("UPDATE ". DB_PREFIX ."{$table} SET {$fieldDetails} WHERE {$whereDetails}");
+        $stmt = self::$db->prepare("UPDATE ". DB_PREFIX ."{$table} SET {$fieldDetails} WHERE {$whereDetails}");
 
         foreach ($data as $key => $value) {
             $stmt->bindValue(":$key", $value);
@@ -92,7 +107,11 @@ final class Database extends PDO {
         return $stmt->execute();
     }
 
-    public function delete($table, $where, $limit = 1) {
+    public static function delete($table, $where, $limit = 1) {
+
+        if (!self::$db) {
+            self::initialize();
+        }
 
         ksort($where);
 
@@ -107,7 +126,7 @@ final class Database extends PDO {
         }
         $whereDetails = ltrim($whereDetails, ' AND ');
 
-        $stmt = $this->prepare("DELETE FROM ". DB_PREFIX ."$table WHERE $whereDetails LIMIT $limit");
+        $stmt = self::$db->prepare("DELETE FROM ". DB_PREFIX ."$table WHERE $whereDetails LIMIT $limit");
 
         foreach ($where as $key => $value) {
             $stmt->bindValue(":$key", $value);
@@ -116,8 +135,12 @@ final class Database extends PDO {
         return $stmt->execute();
     }
 
-    public function truncate($table) {
-        return $this->exec("TRUNCATE TABLE ". DB_PREFIX ."{$table}");
+    public static function truncate($table) {
+        if (!self::$db) {
+            self::initialize();
+        }
+
+        return self::$db->exec("TRUNCATE TABLE ". DB_PREFIX ."{$table}");
     }
 
     /**
@@ -125,7 +148,11 @@ final class Database extends PDO {
      *
      * @return int
      */
-    public function getLastInsertedId() {
-        return $this->lastInsertId();
+    public static function getLastInsertedId() {
+        if (!self::$db) {
+            self::initialize();
+        }
+
+        return self::$db->lastInsertId();
     }
 }

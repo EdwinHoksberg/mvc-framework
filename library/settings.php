@@ -25,9 +25,8 @@ final class Settings {
         static $data = array();
 
         if (empty($data) || $forceUpdate) {
-            $db = new Database();
 
-            $result = $db->select("
+            $result = Database::select("
             SELECT
                 `name`,
                 `value`
@@ -55,9 +54,7 @@ final class Settings {
      */
     public static function set($name, $value) {
 
-        $db = new Database();
-
-        $alreadyExists = $db->select("SELECT `name` FROM {DB_PREFIX}settings WHERE `name` = :name",
+        $alreadyExists = Database::select("SELECT `name` FROM {DB_PREFIX}settings WHERE `name` = :name",
             array(
                 ":name" => $name
             )
@@ -65,7 +62,7 @@ final class Settings {
 
         if (count($alreadyExists) > 0) { // update existing setting
 
-            return $db->update("settings",
+            return Database::update("settings",
                 array( // values
                     "name" => $name,
                     "value" => $value
@@ -76,7 +73,7 @@ final class Settings {
             );
         } else { // insert new setting in database
 
-            return $db->insert("settings",
+            return Database::insert("settings",
                 array( // values
                     "name" => $name,
                     "value" => $value

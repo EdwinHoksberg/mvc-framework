@@ -29,6 +29,7 @@ class Router {
 
         // load database functions
         require_once(DIR_LIBRARY . 'database.php');
+        Database::initialize();
 
         // load configuration
         require_once(DIR_LIBRARY . 'settings.php');
