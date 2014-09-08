@@ -42,7 +42,7 @@ final class Url {
 
     public static function getRequestParameters() {
 
-        $parameter_segments = array_slice(Url::segments(), 2);
+        $parameter_segments = @array_slice(Url::segments(), 2);
         return (!empty($parameter_segments)) ? $parameter_segments : array();
     }
 
