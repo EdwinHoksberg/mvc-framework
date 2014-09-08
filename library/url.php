@@ -28,6 +28,18 @@ final class Url {
         }
     }
 
+    public static function getController() {
+
+        $controller_segment = Url::segment(0);
+        return (!empty($controller_segment)) ? $controller_segment : 'index';
+    }
+
+    public static function getAction() {
+
+        $controller_segment = Url::segment(1);
+        return (!empty($controller_segment)) ? $controller_segment : 'index';
+    }
+
     /**
      * @param string $location
      * @param string $action

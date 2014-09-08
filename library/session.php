@@ -9,7 +9,7 @@
  *
  * @todo this is an old class, some of the function don't work very well - needs refactoring
  */
-final class Session extends Router {
+final class Session {
 
     private $db;
 

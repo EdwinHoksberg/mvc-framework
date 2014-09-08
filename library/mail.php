@@ -9,7 +9,7 @@
  *
  * @todo add attachment parameter
  */
-final class Mail extends Router {
+final class Mail {
 
     private $_phpmailer;
 

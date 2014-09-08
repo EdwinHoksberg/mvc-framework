@@ -21,6 +21,13 @@ final class Log {
     public static function error($txt_message, $html_message, $exit = false) {
         $logfile = DIR_SERVER . 'logs/error.txt';
 
+        $debug_trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 1);
+        if (basename($debug_trace[0]['file']) == 'database.php') {
+            @file_put_contents($logfile, $txt_message, FILE_APPEND);
+            echo $html_message;
+            exit;
+        }
+
         $txt_message = $txt_message . PHP_EOL;
         $html_message = $html_message . '<br />';
 

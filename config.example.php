@@ -2,12 +2,11 @@
 
 /**
  * This is a sample config file, and shows how you can use it
- * Rename this file to `config.php` when done
+ * Copy this file to `config.php` when done
  *
  * @author Edwin Hoksberg - info@edwinhoksberg.nl
  * @version 1.0
  * @date 31-08-2014
- *
  */
 $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https://' : 'http://';
 
@@ -36,7 +35,6 @@ define('DEFAULT_LANG_SHORT', 'nl');
 
 /**
  * Database settings
- * === Edit these settings ===
  */
 define('DB_DRIVER', 'mysql');
 define('DB_HOST', 'localhost');

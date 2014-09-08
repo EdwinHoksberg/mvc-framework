@@ -9,7 +9,7 @@
  *
  * @todo refactoring
  */
-final class Load extends Router {
+final class Load {
 
     function __construct() {
     }
