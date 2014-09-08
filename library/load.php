@@ -46,25 +46,26 @@ final class Load {
     /**
      * Load a new controller
      *
-     * @param string $page
+     * @param string $controller
      * @param string $action
-     */
-    public function controller($page, $action) {
-        $tokens = explode("/", $page);
-        $file = DIR_SERVER . 'catalog/controller/' . $tokens[0] . '/' . ucfirst($tokens[1]) . 'Controller.php';
+     *
+    */
+    public function controller($controller, $action) {
+
+        $file = DIR_CATALOG . 'controller/' . $controller . '/' . ucfirst($action) . 'Controller.php';
         if (is_readable($file)) {
             require_once($file);
-            $class = ucfirst($tokens[1]) . 'Controller';
+            $class = ucfirst($action) . 'Controller';
             $controller = new $class;
             if (method_exists($controller, $action)) {
-                $controller->$action();
+                $controller->$action(Url::getRequestParameters());
             } else {
-                Log::error("<b>Error:</b> Function {$action} in {$page} not found", "Error: Function {$action} in {$page} not found");
-                $controller->index();
+                Log::error("<b>Error:</b> Function {$action} in {$controller} not found", "Error: Function {$action} in {$controller} not found");
+                $controller->index(Url::getRequestParameters());
             }
         } else {
             header("HTTP/1.0 404 Not Found");
-            $this->view("templates/404", true, array('page' => $page, 'action' => $action));
+            $this->view("templates/404", true, array('page' => $controller, 'action' => $action));
         }
     }
 

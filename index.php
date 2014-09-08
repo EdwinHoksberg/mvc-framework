@@ -58,36 +58,18 @@ class Router {
         require_once(DIR_LIBRARY . 'session.php');
         require_once(DIR_LIBRARY . 'url.php');
 
-        //all url segments
-        $segments = Url::segments();
-
-        //set default action
-        $action = 'index';
-
         // set requested page
         if (Settings::get('maintenance_mode') && empty($_SESSION['session_id'])) {
             $controller = 'maintenance';
-            $function = 'index';
-        } else if (!empty($segments)) {
-            if (count($segments) >= 2) {
-                $controller = Url::segment(0);
-                $function = Url::segment(1);
-            } else if (count($segments) >= 3) {
-                $controller = Url::segment(0);
-                $function = Url::segment(1);
-                $action = Url::segment(3);
-            } else {
-                $controller = 'home';
-                $function = 'index';
-            }
+            $action = 'index';
         } else {
-            $controller = 'home';
-            $function = 'index';
+            $controller = Url::getController();
+            $action = Url::getAction();
         }
 
         // load page controller
         $load = new Load();
-        $load->controller($controller . '/' . $function, $action);
+        $load->controller($controller, $action);
     }
 }
 

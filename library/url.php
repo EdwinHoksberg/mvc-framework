@@ -22,7 +22,7 @@ final class Url {
 
     public static function segments() {
         if (!empty($_GET['route'])) {
-            return explode('/', $_GET['route']);
+            return array_filter(explode('/', ($_GET['route'])));
         } else {
             return false;
         }
@@ -31,13 +31,19 @@ final class Url {
     public static function getController() {
 
         $controller_segment = Url::segment(0);
-        return (!empty($controller_segment)) ? $controller_segment : 'index';
+        return (!empty($controller_segment)) ? $controller_segment : 'home';
     }
 
     public static function getAction() {
 
-        $controller_segment = Url::segment(1);
-        return (!empty($controller_segment)) ? $controller_segment : 'index';
+        $action_segment = Url::segment(1);
+        return (!empty($action_segment)) ? $action_segment : 'index';
+    }
+
+    public static function getRequestParameters() {
+
+        $parameter_segments = array_slice(Url::segments(), 2);
+        return (!empty($parameter_segments)) ? $parameter_segments : array();
     }
 
     /**

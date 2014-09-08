@@ -9,7 +9,7 @@ class IndexController extends Controller {
     public $_data = array();
     public $_page = "home/index";
 
-    function index() {
+    function index($request) {
 
         $this->_data['document_title'] = Settings::get('product_name');
 
