@@ -15,11 +15,13 @@ final class Database extends PDO {
      */
     public function __construct() {
         try {
-            parent::__construct(DB_DRIVER . ':host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_DBNAME . ';charset=utf8;', DB_USER, DB_PASS);
+            parent::__construct(DB_DRIVER . ':host=' . DB_HOST . ';port=' . DB_PORT . ';charset=utf8;', DB_USER, DB_PASS);
+            if ($this->exec("USE " . DB_DBNAME) === false) {
+                Log::error("Database " . DB_DBNAME . " not found!\n", "<h1>Database '" . DB_DBNAME . "' not found!</h1><br />", true);
+            }
             $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            Log::error("MySQL connection failed: {$e->getMessage()}\n", "<b>MySQL connection failed</b>: {$e->getMessage()}<br />", true);
-            exit();
+            Log::error("MySQL connection failed: {$e->getMessage()}\n", "<h1>MySQL connection failed</h1>: {$e->getMessage()}<br />", true);
         }
     }
 
