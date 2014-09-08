@@ -55,25 +55,25 @@ final class Log {
 
         switch($number) {
             case E_ERROR:
-                $txt_error = "Fatal error: " . $message . "on line " . $line . "in file " . $file;
+                $txt_error = "Fatal error: " . $message . " on line " . $line . " in file " . $file;
                 $html_error = "<b>Fatal error: </b>" . $message . "on line <b>" . $line . "</b> in file <b>" . $file . "</b>";
                 self::error($txt_error, $html_error, true);
                 break;
 
             case E_WARNING:
-                $txt_error = "Warning: " . $message . " on line " . $line . "in file " . $file;
+                $txt_error = "Warning: " . $message . " on line " . $line . " in file " . $file;
                 $html_error = "<b>Warning: </b>" . $message . " on line <b>" . $line . "</b> in file <b>" . $file . "</b>";
                 self::error($txt_error, $html_error);
                 break;
 
             case E_NOTICE:
-                $txt_error = "Notice: " . $message . " on line " . $line . "in file " . $file;
+                $txt_error = "Notice: " . $message . " on line " . $line . " in file " . $file;
                 $html_error = "<b>Notice: </b>" . $message . " on line <b>" . $line . "</b> in file <b>" . $file . "</b>";
                 self::error($txt_error, $html_error);
                 break;
 
             default:
-                $txt_error = "Unknown error: " . $message . " on line " . $line . "in file " . $file;
+                $txt_error = "Unknown error: " . $message . " on line " . $line . " in file " . $file;
                 $html_error = "<b>Unknown error: </b>" . $message . " on line <b>" . $line . "</b> in file <b>" . $file . "</b>";
                 self::error($txt_error, $html_error);
                 break;
