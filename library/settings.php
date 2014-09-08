@@ -10,7 +10,7 @@
  *
  * @todo Extend with more functionality
  */
-final class Settings extends Router {
+final class Settings {
 
     /**
      * This function will get any settings from the database.

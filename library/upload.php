@@ -10,7 +10,7 @@
  * @todo add more upload functions for different types of files
  * @todo fix image detection
  */
-final class Upload extends Router {
+final class Upload {
 
     function __construct() {
     }
