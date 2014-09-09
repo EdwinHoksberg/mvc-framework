@@ -11,7 +11,11 @@
  */
 final class Load {
 
-    function __construct() {
+    public function dispatch($controller, $action) {
+        $this->_controller = $controller;
+        $this->_action = $action;
+
+        $this->controller($controller, $action);
     }
 
     /**
@@ -35,7 +39,7 @@ final class Load {
                 require($template);
                 require(DIR_CATALOG . 'view/footer.tpl');
             } else {
-                require $template;
+                require($template);
             }
         } else {
             header("HTTP/1.0 404 Not Found");
@@ -46,17 +50,18 @@ final class Load {
     /**
      * Load a new controller
      *
-     * @param string $controller
-     * @param string $action
-     *
-    */
+     * @internal param string $controller
+     * @internal param string $action
+     */
     public function controller($controller, $action) {
 
         $file = DIR_CATALOG . 'controller/' . $controller . '/' . ucfirst($action) . 'Controller.php';
         if (is_readable($file)) {
+
             require_once($file);
             $class = ucfirst($action) . 'Controller';
             $controller = new $class;
+
             if (method_exists($controller, $action)) {
                 $controller->$action(Url::getRequestParameters());
             } else {
@@ -74,13 +79,12 @@ final class Load {
      *
      * @param string $page
      */
-    public function model($page) {
-        $tokens = explode("/", $page);
-        $file = DIR_SERVER . 'catalog/model/' . $tokens[0] . '/' . ucfirst($tokens[1]) . 'Model.php';
+    public function model($controller, $action) {
+        $file = DIR_SERVER . 'catalog/model/' . $controller . '/' . ucfirst($action) . 'Model.php';
         if (is_readable($file)) {
             require_once($file);
         } else {
-            Log::error("<b>Error:</b> Model {$page} in {$file} not found", "Error: Model {$page} in {$file} not found");
+            Log::error("<b>Error:</b> Model {$action} in {$file} not found", "Error: Model {$action} in {$file} not found");
             //$this->view("errors/404", false);
         }
     }

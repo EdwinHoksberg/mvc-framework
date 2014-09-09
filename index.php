@@ -69,7 +69,7 @@ class Router {
 
         // load page controller
         $load = new Load();
-        $load->controller($controller, $action);
+        $load->dispatch($controller, $action);
     }
 }
 
