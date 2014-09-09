@@ -12,10 +12,15 @@
 final class Load {
 
     public function dispatch($controller, $action) {
+
+        ob_start();
+
         $this->_controller = $controller;
         $this->_action = $action;
 
         $this->controller($controller, $action);
+
+        return ob_get_clean();
     }
 
     /**

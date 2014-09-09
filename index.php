@@ -54,6 +54,7 @@ class Router {
 
         require_once(DIR_LIBRARY . 'load.php');
         require_once(DIR_LIBRARY . 'controller.php');
+        require_once(DIR_LIBRARY . 'response.php');
         require_once(DIR_LIBRARY . 'language.php');
         require_once(DIR_LIBRARY . 'session.php');
         require_once(DIR_LIBRARY . 'url.php');
@@ -69,7 +70,10 @@ class Router {
 
         // load page controller
         $load = new Load();
-        $load->dispatch($controller, $action);
+        $output = $load->dispatch($controller, $action);
+
+        $response = new Response($output);
+        $response->output();
     }
 }
 
