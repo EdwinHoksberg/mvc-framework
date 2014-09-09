@@ -31,9 +31,9 @@ final class Load {
             }
 
             if ($templates) {
-                require(DIR_CATALOG . 'view/templates/header.tpl');
+                require(DIR_CATALOG . 'view/header.tpl');
                 require($template);
-                require(DIR_CATALOG . 'view/templates/footer.tpl');
+                require(DIR_CATALOG . 'view/footer.tpl');
             } else {
                 require $template;
             }
