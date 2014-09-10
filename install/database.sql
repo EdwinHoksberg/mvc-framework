@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 09, 2014 at 10:47 PM
+-- Generation Time: Sep 10, 2014 at 04:19 PM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -44,11 +44,13 @@ INSERT INTO `mvc__language` (`language_id`, `short`, `name`, `fullname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `mvc__session` (
-  `session_id` int(11) NOT NULL AUTO_INCREMENT,
-  `session_data` text NOT NULL,
-  PRIMARY KEY (`session_id`),
-  UNIQUE KEY `Id` (`session_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `session_id` varchar(32) NOT NULL,
+  `ip_address` varchar(16) NOT NULL,
+  `user_agent` varchar(120) NOT NULL,
+  `last_activity` int(10) unsigned NOT NULL,
+  `user_data` text NOT NULL,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
