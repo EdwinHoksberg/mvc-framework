@@ -6,11 +6,18 @@
  * @author Edwin Hoksberg - info@edwinhoksberg.nl
  * @version 1.0
  * @date 31-08-2014
+ * @last-modified 08-09-2014
  *
- * @todo add functions like `getcurrenturl` + more
  */
 final class Url {
 
+    /**
+     * This function will return any segment of the current url
+     *
+     * @param $key - The index of the segment
+     *
+     * @return string|bool
+     */
     public static function segment($key) {
         if (!empty($_GET['route'])) {
             $segments = explode('/', $_GET['route']);
@@ -20,6 +27,11 @@ final class Url {
         }
     }
 
+    /**
+     * This function returns all the current url segments in an array
+     *
+     * @return array|bool
+     */
     public static function segments() {
         if (!empty($_GET['route'])) {
             return array_filter(explode('/', ($_GET['route'])));
@@ -28,18 +40,34 @@ final class Url {
         }
     }
 
+    /**
+     * This function will return the current controller segment
+     *
+     * @return bool|string
+     */
     public static function getController() {
 
         $controller_segment = Url::segment(0);
         return (!empty($controller_segment)) ? $controller_segment : 'home';
     }
 
+    /**
+     * This function returns the current controller action segment
+     *
+     * @return bool|string
+     */
     public static function getAction() {
 
         $action_segment = Url::segment(1);
         return (!empty($action_segment)) ? $action_segment : 'index';
     }
 
+    /**
+     * If there are any other segments that are not the controller or action,
+     * this function returns all the other parameters
+     *
+     * @return array
+     */
     public static function getRequestParameters() {
 
         $parameter_segments = @array_slice(Url::segments(), 2);

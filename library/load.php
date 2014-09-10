@@ -6,11 +6,20 @@
  * @author Edwin Hoksberg - info@edwinhoksberg.nl
  * @version 1.0
  * @date 31-08-2014
+ * @last-modified 10-09-2014
  *
- * @todo refactoring
  */
 final class Load {
 
+    /**
+     * This function will start all the page logic, capture its output,
+     * and send it back for processing.
+     *
+     * @param $controller
+     * @param $action
+     *
+     * @return string
+     */
     public function dispatch($controller, $action) {
 
         ob_start();
@@ -82,7 +91,8 @@ final class Load {
     /**
      * Load a new model
      *
-     * @param string $page
+     * @param $controller
+     * @param $action
      */
     public function model($controller, $action) {
         $file = DIR_SERVER . 'catalog/model/' . $controller . '/' . ucfirst($action) . 'Model.php';

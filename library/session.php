@@ -6,6 +6,7 @@
  * @author Edwin Hoksberg - info@edwinhoksberg.nl
  * @version 1.0
  * @date 31-08-2014
+ * @last-modified 10-09-2014
  *
  */
 final class Session {

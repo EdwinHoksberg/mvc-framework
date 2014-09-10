@@ -1,13 +1,13 @@
 <?php
 
 /**
- * The Response class
+ * The Response class, this class outputs the code and optionally compresses it
  *
  * @author Edwin Hoksberg - info@edwinhoksberg.nl
  * @version 1.0
  * @date 09-09-2014
+ * @last-modified 10-09-2014
  *
- * @todo add compression
  */
 class Response {
 
@@ -22,6 +22,9 @@ class Response {
         }
     }
 
+    /**
+     * This function will compress the html output of a page
+     */
     private function compress() {
         if (!empty($this->_output)) {
 
@@ -40,6 +43,9 @@ class Response {
         }
     }
 
+    /**
+     * This function will send all the html code to the browser, ready to display
+     */
     public function output() {
         if (!empty($this->_output)) {
 

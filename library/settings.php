@@ -7,8 +7,8 @@
  * @author Edwin Hoksberg - info@edwinhoksberg.nl
  * @version 1.0
  * @date 31-08-2014
+ * @last-modified 08-09-2014
  *
- * @todo Extend with more functionality
  */
 final class Settings {
 

@@ -6,8 +6,8 @@
  * @author Edwin Hoksberg - info@edwinhoksberg.nl
  * @version 1.0
  * @date 31-08-2014
+ * @last-modified 10-09-2014
  *
- * @todo work better with URL segments
  */
 class Router {
 
@@ -20,7 +20,7 @@ class Router {
         // start session
         session_start();
 
-        // require config file
+        // require config file if it exists
         if (is_readable('config.php')) {
             require_once('config.php');
         } else {
@@ -44,14 +44,17 @@ class Router {
             }
         }
 
-        // load librarys and main functions
+        // load logging library
         require_once(DIR_LIBRARY . 'log.php');
+
+        // set the php error handler
         $errorHandler = new Log();
         set_error_handler(array(
             $errorHandler,
             'error_handler'
         ));
 
+        // load all necessary libraries
         require_once(DIR_LIBRARY . 'load.php');
         require_once(DIR_LIBRARY . 'controller.php');
         require_once(DIR_LIBRARY . 'response.php');
@@ -59,7 +62,7 @@ class Router {
         require_once(DIR_LIBRARY . 'session.php');
         require_once(DIR_LIBRARY . 'url.php');
 
-        // set requested page
+        // set requested page and controller
         if (Settings::get('maintenance_mode') && empty($_SESSION['session_id'])) {
             $controller = 'maintenance';
             $action = 'index';
@@ -68,10 +71,11 @@ class Router {
             $action = Url::getAction();
         }
 
-        // load page controller
+        // load page controller and fetch the page contents
         $load = new Load();
         $output = $load->dispatch($controller, $action);
 
+        // process the page and output it
         $response = new Response($output);
         $response->output();
     }

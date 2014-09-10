@@ -6,8 +6,9 @@
  * @author Edwin Hoksberg - info@edwinhoksberg.nl
  * @version 1.0
  * @date 31-08-2014
+ * @last-modified 07-09-2014
  *
- * @todo add info and more levels or logging
+ * @todo add logging level `info`
  */
 final class Log {
 
