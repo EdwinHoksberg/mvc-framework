@@ -22,6 +22,7 @@ define('HTTP_IMG', HTTP_SERVER . 'public/images/');
 define('HTTP_JS', HTTP_SERVER . 'public/js/');
 
 define('DIR_SERVER', $sitepath);
+define('DIR_SYSTEM', DIR_SERVER . 'system/');
 define('DIR_CATALOG', DIR_SERVER . 'catalog/');
 define('DIR_UPLOAD', DIR_SERVER . 'uploads/');
 define('DIR_LIBRARY', DIR_SERVER . 'library/');

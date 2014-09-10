@@ -28,11 +28,21 @@ class Router {
         }
 
         // load database functions
-        require_once(DIR_LIBRARY . 'database.php');
+        require_once(DIR_SYSTEM . 'database.php');
         Database::initialize();
 
         // load configuration
-        require_once(DIR_LIBRARY . 'settings.php');
+        require_once(DIR_SYSTEM . 'settings.php');
+
+        // load logging library
+        require_once(DIR_SYSTEM . 'log.php');
+
+        // load additional system classes
+        require_once(DIR_SYSTEM . 'load.php');
+        require_once(DIR_SYSTEM . 'controller.php');
+        require_once(DIR_SYSTEM . 'response.php');
+        require_once(DIR_SYSTEM . 'language.php');
+        require_once(DIR_SYSTEM . 'session.php');
 
         // check if timezone setting has been set
         $timezone = ini_get('date.timezone');
@@ -43,10 +53,6 @@ class Router {
                 date_default_timezone_set('Europe/Amsterdam');
             }
         }
-
-        // load logging library
-        require_once(DIR_LIBRARY . 'log.php');
-
         // set the php error handler
         $errorHandler = new Log();
         set_error_handler(array(
@@ -54,13 +60,11 @@ class Router {
             'error_handler'
         ));
 
-        // load all necessary libraries
-        require_once(DIR_LIBRARY . 'load.php');
-        require_once(DIR_LIBRARY . 'controller.php');
-        require_once(DIR_LIBRARY . 'response.php');
-        require_once(DIR_LIBRARY . 'language.php');
-        require_once(DIR_LIBRARY . 'session.php');
+        // load helper libraries
         require_once(DIR_LIBRARY . 'url.php');
+        require_once(DIR_LIBRARY . 'mail.php');
+        require_once(DIR_LIBRARY . 'security.php');
+        require_once(DIR_LIBRARY . 'upload.php');
 
         // set requested page and controller
         if (Settings::get('maintenance_mode') && empty($_SESSION['session_id'])) {
