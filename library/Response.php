@@ -17,7 +17,7 @@ class Response {
     public function __construct($output) {
         $this->_output = $output;
 
-        if (Settings::get('gzip_output') || 1) {
+        if (Settings::get('gzip_output')) {
             $this->compress();
         }
     }
