@@ -57,7 +57,7 @@ final class Load {
             }
         } else {
             header("HTTP/1.0 404 Not Found");
-            require(DIR_CATALOG . 'view/templates/404.tpl');
+            $this->view("errors/404", true, array('type' => 'view', 'page' => $page));
         }
     }
 
@@ -84,7 +84,7 @@ final class Load {
             }
         } else {
             header("HTTP/1.0 404 Not Found");
-            $this->view("templates/404", true, array('page' => $controller, 'action' => $action));
+            $this->view("errors/404", true, array('type' => 'controller', 'controller' => $controller, 'action' => $action));
         }
     }
 
@@ -100,7 +100,6 @@ final class Load {
             require_once($file);
         } else {
             Log::error("<b>Error:</b> Model {$action} in {$file} not found", "Error: Model {$action} in {$file} not found");
-            //$this->view("errors/404", false);
         }
     }
 }
