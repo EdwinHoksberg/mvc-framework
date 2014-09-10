@@ -12,12 +12,12 @@
 class Response {
 
     private $_output;
-    private $_headers = array();
+    private $_encoding;
 
     public function __construct($output) {
         $this->_output = $output;
 
-        if (Settings::get('gzip_output')) {
+        if (Settings::get('gzip_output') || 1) {
             $this->compress();
         }
     }
@@ -26,9 +26,14 @@ class Response {
         if (!empty($this->_output)) {
 
             if (strstr($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
+                $this->_encoding = 'gzip';
+            }
 
-                $this->_headers[] = 'Content-Encoding: gzip';
+            if (strstr($_SERVER['HTTP_ACCEPT_ENCODING'], 'x-gzip')) {
+                $this->_encoding = 'x-gzip';
+            }
 
+            if (!empty($this->_encoding)) {
                 $gz_level = Settings::get('gzip_level') ?: -1;
                 $this->_output = gzencode($this->_output, $gz_level);
             }
@@ -38,10 +43,8 @@ class Response {
     public function output() {
         if (!empty($this->_output)) {
 
-            if (!headers_sent()) {
-                foreach($this->_headers as $header) {
-                    header($header, true);
-                }
+            if (!headers_sent() && !empty($this->_encoding)) {
+                header('Content-Encoding: ' . $this->_encoding, true);
             }
 
             echo $this->_output;
