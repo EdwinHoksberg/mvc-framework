@@ -27,22 +27,12 @@ class Router {
             die('config.php not found');
         }
 
-        // load database functions
-        require_once(DIR_SYSTEM . 'database.php');
+        spl_autoload_register(function($class) {
+            require_once(DIR_SYSTEM . $class . '.php');
+        });
+
+        // initialize database
         Database::initialize();
-
-        // load configuration
-        require_once(DIR_SYSTEM . 'settings.php');
-
-        // load logging library
-        require_once(DIR_SYSTEM . 'log.php');
-
-        // load additional system classes
-        require_once(DIR_SYSTEM . 'load.php');
-        require_once(DIR_SYSTEM . 'controller.php');
-        require_once(DIR_SYSTEM . 'response.php');
-        require_once(DIR_SYSTEM . 'language.php');
-        require_once(DIR_SYSTEM . 'url.php');
 
         // check if timezone setting has been set
         $timezone = ini_get('date.timezone');
