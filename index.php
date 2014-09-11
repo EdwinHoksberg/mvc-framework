@@ -42,7 +42,7 @@ class Router {
         require_once(DIR_SYSTEM . 'controller.php');
         require_once(DIR_SYSTEM . 'response.php');
         require_once(DIR_SYSTEM . 'language.php');
-        require_once(DIR_SYSTEM . 'session.php');
+        require_once(DIR_SYSTEM . 'url.php');
 
         // check if timezone setting has been set
         $timezone = ini_get('date.timezone');
@@ -61,10 +61,10 @@ class Router {
         ));
 
         // load helper libraries
-        require_once(DIR_LIBRARY . 'url.php');
         require_once(DIR_LIBRARY . 'mail.php');
         require_once(DIR_LIBRARY . 'security.php');
         require_once(DIR_LIBRARY . 'upload.php');
+        require_once(DIR_LIBRARY . 'session.php');
 
         // set requested page and controller
         if (Settings::get('maintenance_mode') && empty($_SESSION['session_id'])) {
