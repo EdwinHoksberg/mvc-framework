@@ -66,11 +66,15 @@ final class Url {
      * If there are any other segments that are not the controller or action,
      * this function returns all the other parameters
      *
+     * @param $controller_only
+     *
      * @return array
      */
-    public static function getRequestParameters() {
+    public static function getRequestParameters($controller_only = false) {
 
-        $parameter_segments = @array_slice(Url::segments(), 2);
+        $to_remove = ($controller_only) ? 1 : 2;
+
+        $parameter_segments = @array_slice(Url::segments(), $to_remove);
         return (!empty($parameter_segments)) ? $parameter_segments : array();
     }
 
