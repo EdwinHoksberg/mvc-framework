@@ -11,11 +11,6 @@
  */
 class Controller extends Router {
 
-    public $_load;
-    public $_url;
-    public $_lang;
-    public $_session;
-
     function __construct() {
         $this->_load = new Load();
         $this->_url = new Url();
