@@ -17,7 +17,7 @@ class Database {
      */
     public static function initialize() {
         try {
-            self::$db = new PDO(DB_DRIVER . ':host=' . DB_HOST . ';port=' . DB_PORT . ';charset=utf8;', DB_USER, DB_PASS);
+            self::$db = new PDO(DB_DRIVER . ':host=' . DB_HOST . ';port=' . DB_PORT . ';charset=' . CHARSET . ';', DB_USER, DB_PASS);
             if (self::$db->exec("USE " . DB_DBNAME) === false) {
                 Log::error("Database " . DB_DBNAME . " not found!\n", "<h1>Database '" . DB_DBNAME . "' not found!</h1><br />", true);
             }

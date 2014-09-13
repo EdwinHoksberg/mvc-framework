@@ -33,6 +33,7 @@ define('DIR_LANGUAGE', DIR_CATALOG . 'language/');
  */
 define('DEFAULT_LANG_ID', 1);
 define('DEFAULT_LANG_SHORT', 'nl');
+define('CHARSET', 'utf-8');
 
 /**
  * Database settings
