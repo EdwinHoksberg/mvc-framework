@@ -8,7 +8,7 @@
  * @date 31-08-2014
  *
  */
-final class Database {
+class Database {
 
     protected static $db;
 

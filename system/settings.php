@@ -10,7 +10,7 @@
  * @last-modified 08-09-2014
  *
  */
-final class Settings {
+class Settings {
 
     /**
      * This function will get any settings from the database.

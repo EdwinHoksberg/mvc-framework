@@ -9,7 +9,7 @@
  * @last-modified 10-09-2014
  *
  */
-final class Session {
+class Session {
 
     private $_sessionid;
     private $_ipaddress;

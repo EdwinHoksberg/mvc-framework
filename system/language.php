@@ -9,7 +9,7 @@
  * @last-modified 08-09-2014
  *
  */
-final class Language {
+class Language {
 
     /**
      * This function will return all the language needed for the appropiate page.

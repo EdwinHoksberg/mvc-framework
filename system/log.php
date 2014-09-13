@@ -9,7 +9,7 @@
  * @last-modified 07-09-2014
  *
  */
-final class Log {
+class Log {
 
     /**
      * Function that handles error logging and displaying

@@ -11,7 +11,7 @@
  * @todo add more upload functions for different types of files
  * @todo fix image detection
  */
-final class Upload {
+class Upload {
 
     function __construct() {
     }
