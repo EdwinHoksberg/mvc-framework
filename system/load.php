@@ -84,20 +84,9 @@ final class Load {
                 $controller->index(Url::getRequestParameters());
             }
         } else {
-            $file = DIR_CATALOG . 'controller/' . $controller . '/IndexController.php';
-            if (is_readable($file)) {
-
-                require_once($file);
-
-                $class = 'IndexController';
-                $controller = new $class;
-                $controller->index(Url::getRequestParameters(true));
-
-            } else {
-                header("HTTP/1.0 404 Not Found");
-                $this->view("errors/404", true, array('type' => 'controller', 'controller' => $controller, 'action' => $action));
-                return;
-            }
+            header("HTTP/1.0 404 Not Found");
+            $this->view("errors/404", true, array('type' => 'controller', 'controller' => $controller, 'action' => $action));
+            return;
         }
     }
 
