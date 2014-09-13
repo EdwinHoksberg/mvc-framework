@@ -8,7 +8,6 @@
  * @date 31-08-2014
  * @last-modified 07-09-2014
  *
- * @todo add logging level `info`
  */
 final class Log {
 
@@ -46,6 +45,14 @@ final class Log {
 
         if ($exit) {
             exit;
+        }
+    }
+
+    public static function info($txt_message) {
+        $logfile = DIR_SERVER . 'logs/error.txt';
+
+        if (is_writable($logfile)) {
+            file_put_contents($logfile, "[INFO] " . $txt_message . "\n", FILE_APPEND);
         }
     }
 
