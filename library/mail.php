@@ -14,7 +14,7 @@ class Mail {
     private $_phpmailer;
 
     function __construct() {
-        require(DIR_LIBRARY . 'external/phpmailer/PHPMailerAutoload.php');
+        require_once(DIR_LIBRARY . 'external/phpmailer/PHPMailerAutoload.php');
         $this->_phpmailer = new PHPMailer();
     }
 
